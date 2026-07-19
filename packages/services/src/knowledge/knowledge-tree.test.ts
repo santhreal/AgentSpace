@@ -22,3 +22,8 @@ test("isDescendant terminates on cyclic parentId chains", () => {
   assert.equal(isDescendant(pages, "root", "a"), false);
   assert.equal(isDescendant(pages, "a", "b"), true);
 });
+
+test("isDescendant detects an existing self-parent link without hanging", () => {
+  const pages = [{ id: "x", parentId: "x" }];
+  assert.equal(isDescendant(pages, "x", "x"), true);
+});

@@ -126,6 +126,9 @@ export function moveKnowledgePageSync(
   }
 
   if (input.parentId !== null) {
+    if (input.parentId === id) {
+      throw new Error("Cannot move a page under itself.");
+    }
     const parent = state.knowledgePages.find((p) => p.id === input.parentId);
     if (!parent) {
       throw new Error(`Target parent page "${input.parentId}" does not exist.`);
